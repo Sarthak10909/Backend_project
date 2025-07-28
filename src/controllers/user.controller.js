@@ -119,9 +119,7 @@ const loginUser = asyncHandler(async (req, res) => {
   
 
   //generate and send the access and refresh tokens
-  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-    user._id
-  );
+  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
 
   //optional but remove the password and refresh tokens from the user
   const loggedInUser = await User.findById(user._id).select(
@@ -134,7 +132,7 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   };
-  console.log("is it reaching here")  
+
   //finally send the response
   return res
     .status(200)
